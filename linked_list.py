@@ -42,3 +42,16 @@ class SingleLinkedList(object):
         else:
             node.next = self.head
             self.head = node
+
+    def top(self):
+        if self.head is None:
+            return None
+
+        return self.head
+
+    def pop_front(self):
+        if self.head is None:
+            return None
+        item = self.head
+        self.head = self.head.next
+        return item
