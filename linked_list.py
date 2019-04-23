@@ -43,7 +43,7 @@ class SingleLinkedList(object):
             node.next = self.head
             self.head = node
 
-    def top(self):
+    def top_front(self):
         if self.head is None:
             return None
 
@@ -55,3 +55,35 @@ class SingleLinkedList(object):
         item = self.head
         self.head = self.head.next
         return item
+
+    def top_back(self):
+        if self.head is None:
+            return None
+        i = self.head
+        while i.next is not None:
+            i = i.next
+        return i
+
+    def pop_back(self):
+        if self.head is None:
+            return None
+        if self.head.next is None:
+            node = self.head
+            self.head = None
+            return node
+        i = self.head
+        while i.next.next is not None:
+            i = i.next
+        node = i.next
+        i.next = None
+        return node
+
+    def find(self, key):
+        if not self.head:
+            return False
+        cur_head = self.head
+        while cur_head:
+            if cur_head.data == key:
+                return True
+            cur_head = cur_head.next
+        return False

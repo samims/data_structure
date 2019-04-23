@@ -18,7 +18,6 @@ class TestSingleLinkedListWithoutTail(unittest.TestCase):
         self.linked_list = SingleLinkedList()
 
     def test_head_is_none_by_default(self):
-
         self.assertIsNone(self.linked_list.head)
 
     def test_prepend_to_empty_list(self):
@@ -42,9 +41,9 @@ class TestSingleLinkedListWithoutTail(unittest.TestCase):
         self.assertIsNone(self.linked_list.pop_front())
 
     def test_top_front(self):
-        self.assertIsNone(self.linked_list.top())
+        self.assertIsNone(self.linked_list.top_front())
         self.linked_list.prepend(self.node1)
-        self.assertTrue(self.linked_list.top(), self.node1)
+        self.assertTrue(self.linked_list.top_front(), self.node1)
 
     def test_pop_front_non_empty_linked_list(self):
         node1 = Node(1)
@@ -57,3 +56,35 @@ class TestSingleLinkedListWithoutTail(unittest.TestCase):
 
         self.assertTrue(self.linked_list.pop_front(), node3)
         self.assertTrue(self.linked_list.pop_front().data, node2.data)
+
+    def test_top_back_empty_linked_list(self):
+        self.assertIsNone(self.linked_list.top_back())
+
+    def test_top_back_non_empty_linked_list(self):
+        self.linked_list.prepend(self.node1)
+        self.linked_list.prepend(self.node2)
+
+        self.assertEqual(self.linked_list.top_back(), self.node1)
+
+    def test_pop_back_empty_linked_list(self):
+        self.assertIsNone(self.linked_list.pop_back())
+
+    def test_pop_back_single_value_linked_list(self):
+        self.linked_list.prepend(self.node1)
+        self.assertEqual(self.linked_list.pop_back(), self.node1)
+
+    def test_pop_back_multi_value_linked_list(self):
+        self.linked_list.prepend(self.node1)
+        self.linked_list.prepend(self.node2)
+        node3 = Node(3)
+        self.linked_list.prepend(node3)
+        self.assertEqual(self.linked_list.pop_back(), self.node1)
+        self.assertEqual(self.linked_list.pop_back(), self.node2)
+
+    def test_find_key_in_empty_linked_list(self):
+        self.assertFalse(self.linked_list.find(1))
+
+    def test_find_key_in_non_empty_list(self):
+        self.linked_list.prepend(self.node1)
+        self.linked_list.prepend(self.node2)
+        self.assertTrue(self.linked_list.find(1))
