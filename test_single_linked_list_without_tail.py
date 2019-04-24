@@ -88,3 +88,24 @@ class TestSingleLinkedListWithoutTail(unittest.TestCase):
         self.linked_list.prepend(self.node1)
         self.linked_list.prepend(self.node2)
         self.assertTrue(self.linked_list.find(1))
+
+    def test_remove_blank_linked_list(self):
+        self.assertIsNone(self.linked_list.remove(1))
+
+    def test_remove_key_from_single_item_linked_list(self):
+        # TODO check if linked list object changed
+        # comp_linked_list = SingleLinkedList()
+        self.linked_list.prepend(self.node1)
+        self.assertEqual(self.linked_list.remove(1), 1)
+        # self.assertIs(comp_linked_list, self.linked_list)
+
+    def test_remove_key_from_two_items_linked_list(self):
+        self.linked_list.prepend(self.node1)
+        self.linked_list.prepend(self.node2)
+        self.assertEqual(self.linked_list.remove(2), 2)
+
+    def test_remove_key_from_multi_items_linked_list(self):
+        self.linked_list.prepend(self.node1)
+        self.linked_list.prepend(self.node2)
+        self.linked_list.prepend(Node(3))
+        self.assertEqual(self.linked_list.remove(2), 2)

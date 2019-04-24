@@ -87,3 +87,21 @@ class SingleLinkedList(object):
                 return True
             cur_head = cur_head.next
         return False
+
+    def remove(self, key):
+        if not self.head:
+            return
+        cur_node = self.head
+        prev_node = None
+        while cur_node:
+            if cur_node.data == key:
+                if not prev_node:
+                    self.head = None
+                    return cur_node.data
+                if cur_node.next:
+                    prev_node.next = cur_node.next
+                    return cur_node.data
+                prev_node.next = None
+                return cur_node
+            cur_node = cur_node.next
+        return None
