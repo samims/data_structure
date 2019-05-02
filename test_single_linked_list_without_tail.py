@@ -15,6 +15,7 @@ class TestSingleLinkedListWithoutTail(unittest.TestCase):
     def setUp(self):
         self.node1 = Node(1)
         self.node2 = Node(2)
+        self.node3 = Node(3)
         self.linked_list = SingleLinkedList()
 
     def test_head_is_none_by_default(self):
@@ -109,3 +110,23 @@ class TestSingleLinkedListWithoutTail(unittest.TestCase):
         self.linked_list.prepend(self.node2)
         self.linked_list.prepend(Node(3))
         self.assertEqual(self.linked_list.remove(2), 2)
+
+    def test_is_empty(self):
+        self.assertTrue(self.linked_list.is_empty())
+        self.linked_list.prepend(self.node2)
+        self.assertFalse(self.linked_list.is_empty())
+
+    def test_insert_before_if_prev_node(self):
+        self.linked_list.prepend(self.node1)
+        self.linked_list.prepend(self.node2)
+        self.linked_list.prepend(self.node3)
+        self.linked_list.add_before(3, 4)
+
+        self.assertTrue(self.linked_list.find(4))
+        self.assertEqual(self.linked_list.add_before(3, 4), 4)
+
+    def test_insert_before_if_prev_none(self):
+        self.assertIsNone(self.linked_list.add_before(1, 1))
+        self.linked_list.prepend(self.node1)
+        self.linked_list.add_before(1, 1)
+

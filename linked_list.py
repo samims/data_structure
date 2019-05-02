@@ -105,3 +105,44 @@ class SingleLinkedList(object):
                 return cur_node
             cur_node = cur_node.next
         return None
+
+    def is_empty(self):
+        if not self.head:
+            return True
+        return False
+
+    def add_before(self, element, data):
+        element = Node(element)
+        node = Node(data)
+        cur_node = self.head
+        prev_node = None
+        if not cur_node:
+            return None
+        while cur_node:
+            if cur_node.data == element.data:
+                if prev_node:
+                    prev_node.next = node
+                    node.next = cur_node
+                    return node.data
+                node.next = cur_node
+                self.head = node
+                return node.data
+            prev_node = cur_node
+            cur_node = cur_node.next
+
+        return None
+
+    def add_after(self, element, data):
+        element = Node(element)
+        node = Node(data)
+
+        cur_node = self.head
+
+        while cur_node:
+            if cur_node.data == element.data:
+                if cur_node.next:
+                    node.next = cur_node.next
+                cur_node.next = node
+                return node.data
+            cur_node = cur_node.next
+        return None
